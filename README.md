@@ -1,60 +1,54 @@
-# Student Marks Management System
+# Student Management Dashboard
 
-A React-based Student Marks and Grade Management System developed using **React and Vite**.
-
-The application allows faculty members to select students, enter and update subject marks, and view the calculated total, average, grade, and pass/fail status.
+A React-based Student Management Dashboard developed as part of the **DevOps and Full Stack** course.
 
 ## 🚀 Live Demo
 
-[Student Marks Management System](https://student-marks-system3.vercel.app/)
+https://student-dashboard-flax-chi.vercel.app/
 
-## 📌 Features
+## 📌 Project Overview
 
-- Display a list of students
-- Display student ID, name, and department
-- Select a student
-- Enter and update marks for different subjects
-- Automatic calculation of total marks
-- Automatic calculation of average marks
-- Automatic grade calculation
-- Pass/Fail status
-- Marks validation between 0 and 100
+The Student Management Dashboard allows students to view their academic information through a simple and responsive web interface.
+
+The dashboard displays:
+
+- Student profile information
+- Roll number, branch, and year
+- Enrolled subjects
+- Attendance percentage
+- Attendance eligibility status
+- Upcoming examination details
+- Multiple student profiles
 - Reusable React components
-- Props for passing student and marks information
-- React `useState()` for dynamic state management
-- Responsive and modern user interface
 
 ## 🛠️ Technologies Used
 
 - React.js
 - Vite
-- JavaScript
-- HTML
+- JavaScript (JSX)
 - CSS
-- React Hooks (`useState`)
 - Vercel
 
 ## 📂 Project Structure
 
 ```text
-student-marks-system/
-│
+student-dashboard/
 ├── public/
-│
 ├── src/
 │   ├── components/
-│   │   ├── StudentList.jsx
-│   │   ├── Student.jsx
-│   │   ├── MarksForm.jsx
-│   │   ├── Result.jsx
-│   │   └── Grade.jsx
-│   │
+│   │   ├── Attendance.jsx
+│   │   ├── ExamDetails.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
+│   │   ├── StudentCard.jsx
+│   │   ├── StudentProfile.jsx
+│   │   └── SubjectList.jsx
 │   ├── App.jsx
 │   ├── App.css
-│   ├── index.css
+│   ├── Dashboard.css
 │   └── main.jsx
-│
 ├── .gitignore
+├── eslint.config.js
 ├── index.html
 ├── package.json
 ├── package-lock.json

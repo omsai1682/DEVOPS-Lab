@@ -1,10 +1,7 @@
-function Footer() {
+export default function Footer() {
   return (
-    <footer className="footer">
-      <p>Contact: support@foodie.com</p>
-      <p>© 2026 Foodie. All rights reserved.</p>
+    <footer className="dashboard-footer">
+      <p>&copy; 2026 Student Management System. All rights reserved.</p>
     </footer>
   );
 }
-
-export default Footer;
