@@ -1,114 +1,109 @@
 import { useState } from "react";
 
-import Header from "./components/Header";
-import RestaurantList from "./components/RestaurantList";
-import FoodItem from "./components/FoodItem";
-import Cart from "./components/Cart";
-import Footer from "./components/Footer";
+import StudentList from "./components/StudentList";
+import MarksForm from "./components/MarksForm";
+import Result from "./components/Result";
+
+import "./App.css";
 
 function App() {
-  const [cart, setCart] = useState([]);
-
-  const foods = [
+  // Student details
+  const [students, setStudents] = useState([
     {
-      id: 1,
-      name: "Margherita Pizza",
-      price: 250,
-      image:
-        "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
+      id: "S101",
+      name: "Rahul",
+      department: "CSE",
+      subjects: ["Java", "React", "DBMS"],
+      marks: {
+        Java: 80,
+        React: 75,
+        DBMS: 85,
+      },
     },
     {
-      id: 2,
-      name: "Cheese Burger",
-      price: 180,
-      image:
-        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd"
+      id: "S102",
+      name: "Priya",
+      department: "AI & ML",
+      subjects: ["Java", "React", "DBMS"],
+      marks: {
+        Java: 90,
+        React: 88,
+        DBMS: 92,
+      },
     },
     {
-      id: 3,
-      name: "Chicken Biryani",
-      price: 220,
-      image:
-        "https://images.unsplash.com/photo-1589302168068-964664d93dc0"
+      id: "S103",
+      name: "Arjun",
+      department: "ECE",
+      subjects: ["Java", "React", "DBMS"],
+      marks: {
+        Java: 65,
+        React: 70,
+        DBMS: 68,
+      },
     },
-    {
-      id: 4,
-      name: "French Fries",
-      price: 120,
-      image:
-        "https://images.unsplash.com/photo-1573080496219-bb080dd4f877"
-    }
-  ];
+  ]);
 
-  const addToCart = (food) => {
-    const existingItem = cart.find((item) => item.id === food.id);
+  // Selected student
+  const [selectedStudent, setSelectedStudent] = useState(null);
 
-    if (existingItem) {
-      setCart(
-        cart.map((item) =>
-          item.id === food.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        )
-      );
-    } else {
-      setCart([...cart, { ...food, quantity: 1 }]);
-    }
+  // Select a student
+  const handleSelectStudent = (student) => {
+    setSelectedStudent(student);
   };
 
-  const increaseQuantity = (id) => {
-    setCart(
-      cart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
+  // Update marks
+  const handleMarksUpdate = (updatedMarks) => {
+    const updatedStudents = students.map((student) =>
+      student.id === selectedStudent.id
+        ? {
+            ...student,
+            marks: updatedMarks,
+          }
+        : student
     );
-  };
 
-  const decreaseQuantity = (id) => {
-    setCart(
-      cart
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
+    setStudents(updatedStudents);
+
+    setSelectedStudent({
+      ...selectedStudent,
+      marks: updatedMarks,
+    });
   };
 
   return (
-    <div>
-      <Header />
+    <div className="app">
 
-      <main className="container">
+      <h1>Student Marks Management System</h1>
 
-        <RestaurantList />
+      {/* Student List */}
+      <StudentList
+        students={students}
+        onSelect={handleSelectStudent}
+      />
 
-        <section>
-          <h2>🍽️ Food Menu</h2>
+      {/* Selected Student */}
+      {selectedStudent && (
+        <div className="management-section">
 
-          <div className="food-list">
-            {foods.map((food) => (
-              <FoodItem
-                key={food.id}
-                food={food}
-                addToCart={addToCart}
-              />
-            ))}
-          </div>
-        </section>
+          <h2>
+            Selected Student: {selectedStudent.name}
+          </h2>
 
-        <Cart
-          cart={cart}
-          increaseQuantity={increaseQuantity}
-          decreaseQuantity={decreaseQuantity}
-        />
+          {/* Marks Form */}
+          <MarksForm
+            student={selectedStudent}
+            onMarksUpdate={handleMarksUpdate}
+          />
 
-      </main>
+          {/* Result */}
+          <Result
+            marks={selectedStudent.marks}
+          />
 
-      <Footer />
+        </div>
+      )}
+
     </div>
   );
 }
